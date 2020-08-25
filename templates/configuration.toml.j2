@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightText: 2020 Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: 2020 Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+concurrent = "{{ gitlab_ci_concurrent_jobs }}"
+check_interval = 0
+log_level = "{{ gitlab_ci_log_level }}"
+{% if gitlab_ci_sentry_dsn is defined %}
+sentry_dsn = "{{ gitlab_ci_sentry_dsn }}"
+{$ endif $}
+
+[[runners]]
+  name = "gitlab-runner-manager.hemera"
+  limit = 10
+  url = "{{ gitlab_ci_gitlab_url }}"
+  token = "{{ gitlab_ci_token }}"
+  executor = "docker+machine"
+  environment = ["DOCKER_OPTS=--mtu=1450","DOCKER_TLS_CERTDIR=/certs"]
+  [runners.docker]
+    tls_verify = false
+    image = "{{ gitlab_ci_default_image }}"
+    privileged = true
+    disable_cache = false
+    shm_size = 0
+    volumes = ["/certs/client", "/cache"]
+  [runners.cache]
+    {% if gitlab_ci_use_s3_cache %}
+    Type = "s3"
+    [runners.cache.s3]
+      ServerAddress = "{{ gitlab_ci_s3_server_address }}"
+      AccessKey = "{{ gitlab_ci_s3_access_key }}"
+      SecretKey = "{{ gitlab_ci_s3_secret_key }}"
+      BucketName = "{{ gitlab_ci_s3_bucketname }}"
+      Insecure = "{{ gitlab_ci_s3_is_insecure }}"
+    {% endif %}
+  [runners.machine]
+    IdleCount = 0
+    IdleTime = 3600
+    MaxBuilds = 1
+    MachineDriver = "openstack"
+    MachineName = "auto-scale-%s"
+    MachineOptions = [
+        "openstack-auth-url={{ gitlab_ci_openstack_auth_url }}",
+        "openstack-image-id={{ gitlab_ci_openstack_image_id }}",
+        "openstack-flavor-name={{ gitlab_ci_openstack_flavor_name }}",
+        "openstack-net-id={{ gitlab_ci_openstack_net_id }}",
+        "openstack-username={{ gitlab_ci_openstack_username }}",
+        "openstack-password={{ gitlab_ci_openstack_password }}",
+        "openstack-tenant-id={{ gitlab_ci_openstack_tenant_id }}",
+        "openstack-domain-name={{ gitlab_ci_openstack_domain_name }}",
+        "openstack-ssh-user={{ gitlab_ci_openstack_ssh_user }}",
+        "openstack-sec-groups={{ gitlab_ci_openstack_security_group }}",
+        "openstack-keypair-name={{ gitlab_ci_openstack_keypair_name }}",
+        "openstack-private-key-file=/etc/gitlab-runner/runner.key",
+        "openstack-user-data-file=/etc/gitlab-runner/ignition-fedora.json",
+        "openstack-active-timeout=300",
+        {% if gitlab_ci_engine_registry_mirror is defined %}
+        "engine-registry-mirror={{ gitlab_ci_engine_registry_mirror }}",
+        {% endif %}
+    ]
+    OffPeakTimezone = ""
+    OffPeakIdleCount = 0
+    OffPeakIdleTime = 0
