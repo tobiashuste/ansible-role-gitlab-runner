@@ -35,6 +35,6 @@
     {% endfor %}
     {% endif %}
   when: gitlab_runner.name not in configured_runners.stderr
-  no_log: True
+  # no_log: True
 
 ...
