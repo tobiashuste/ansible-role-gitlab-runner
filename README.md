@@ -159,7 +159,8 @@ gitlab_runner_list:
         - "openstack-private-key-file=/etc/gitlab-runner/gitlab_runner_key"
         - "openstack-user-data-file=/etc/gitlab-runner/flatcar-linux-config.yml"
         - "openstack-active-timeout=300"
-        - "engine-registry-mirror=https://registry-mirror.example"
+        # Only configure if gitlab_runner_registry_mirror is set
+        - "engine-registry-mirror={{ gitlab_runner_registry_mirror }}"
 ```
 
 The most important changes compared to the docker runner registration is the

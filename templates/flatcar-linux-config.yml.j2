@@ -19,6 +19,20 @@ storage:
 {% for nameserver in gitlab_runner_namerservers %}
           nameserver {{ nameserver }}
 {% endfor %}
+    # Required for Docker in Docker to configure this as well
+    - filesystem: root
+      path: /opt/docker/daemon.json
+      mode: 0644
+      contents:
+        inline: |
+          {
+            {% if gitlab_runner_registry_mirror | length > 0 %}
+            "registry-mirrors": [
+              "{{ gitlab_runner_registry_mirror }}"
+            ],
+            {% endif %}
+            "mtu": {{ gitlab_runner_mtu }}
+          }
 locksmith:
   reboot_strategy: "off"
 systemd:

@@ -32,6 +32,7 @@ provisioner:
         vars:
           gitlab_runner_version: 13.6.0
           gitlab_runner_concurrent: 4
+          gitlab_runner_registry_mirror: "https://registry-mirror.example"
           gitlab_runner_list:
             - name: "test01"
               url: "https://gitlab.com"
@@ -58,6 +59,6 @@ provisioner:
                 - "openstack-private-key-file=/etc/gitlab-runner/gitlab_runner_key"
                 - "openstack-user-data-file=/etc/gitlab-runner/flatcar-linux-config.yml"
                 - "openstack-active-timeout=300"
-                - "engine-registry-mirror=https://registry-mirror.example"
+                - "engine-registry-mirror={{ gitlab_runner_registry_mirror }}"
 verifier:
   name: ansible
