@@ -30,6 +30,9 @@ lint: |
   ansible-lint -v --force-color --exclude .cache/ .
 provisioner:
   name: ansible
+  config_options:
+    defaults:
+      forks: 1
   playbooks:
     prepare: prepare.yml
     converge: converge.yml
