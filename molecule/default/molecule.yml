@@ -18,13 +18,6 @@ platforms:
     override_command: false
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  - name: instance_gitlab_ci_openstack_2
-    image: geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest
-    pre_build_image: true
-    privileged: true
-    override_command: false
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
 lint: |
   yamllint --strict --format colored .
   ansible-lint -v --force-color --exclude .cache/ .
@@ -87,9 +80,5 @@ provisioner:
         gitlab_runner_install_docker: true
         gitlab_runner_ssh_public_key: "test_key.pub"
         gitlab_runner_ssh_private_key: "test_key"
-      instance_gitlab_ci_openstack_2:
-        gitlab_runner_install_docker: false
-        gitlab_runner_ssh_public_key: ""
-        gitlab_runner_ssh_private_key: ""
 verifier:
   name: ansible
