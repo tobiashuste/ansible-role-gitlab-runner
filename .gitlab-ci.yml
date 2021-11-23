@@ -23,6 +23,7 @@ variables:
 include:
   - project: hifis/templates/gitlab-ci
     file: /templates/reuse-compliance.yml
+  - template: SAST-IaC.latest.gitlab-ci.yml
 
 validate:
   stage: lint
