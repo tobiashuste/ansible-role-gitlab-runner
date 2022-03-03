@@ -16,6 +16,7 @@
 - name: Add runner/gitlab-runner GPG key
   ansible.builtin.apt_key:
     url: https://packages.gitlab.com/runner/gitlab-runner/gpgkey
+    id: F6403F6544A38863DAA0B6E03F01618A51312F3F
     state: present
 
 - name: Add packages repository packages.gitlab.com/runner/gitlab-runner
