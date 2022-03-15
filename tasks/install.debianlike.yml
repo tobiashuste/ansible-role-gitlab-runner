@@ -48,5 +48,11 @@
     name: "{{ gitlab_runner_package_name }}"
     state: present
     update_cache: yes
+  when: gitlab_runner_deb_file | length == 0
+
+- name: Install gitlab-runner from a .deb file
+  ansible.builtin.apt:
+    deb: "{{ gitlab_runner_deb_file }}"
+  when: gitlab_runner_deb_file | length > 0
 
 ...
