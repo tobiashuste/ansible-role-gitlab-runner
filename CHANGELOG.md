@@ -1,14 +1,15 @@
 # Changelog
 
-## [Unreleased](https://github.com/hifis-net/ansible-role-gitlab-runner/tree/HEAD)
+## [v0.6.0](https://github.com/hifis-net/ansible-role-gitlab-runner/tree/v0.6.0) (2022-05-20)
 
-[Full Changelog](https://github.com/hifis-net/ansible-role-gitlab-runner/compare/v0.5.1...HEAD)
+[Full Changelog](https://github.com/hifis-net/ansible-role-gitlab-runner/compare/v0.5.1...v0.6.0)
 
 **Implemented enhancements:**
 
 - Add badges to README [\#11](https://github.com/hifis-net/ansible-role-gitlab-runner/issues/11)
 - Implement a daily scheduled run of the CI pipeline [\#6](https://github.com/hifis-net/ansible-role-gitlab-runner/issues/6)
 - Update dependencies via Dependabot [\#5](https://github.com/hifis-net/ansible-role-gitlab-runner/issues/5)
+- Migrate changelog to github-changelog-generator [\#21](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/21) ([tobiashuste](https://github.com/tobiashuste))
 - Skip runner registration in molecule test run [\#14](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/14) ([tobiashuste](https://github.com/tobiashuste))
 - Add badges to README [\#12](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/12) ([tobiashuste](https://github.com/tobiashuste))
 - Use caching feature of setup-python action [\#10](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/10) ([tobiashuste](https://github.com/tobiashuste))
