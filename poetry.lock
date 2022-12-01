@@ -600,19 +600,18 @@ test = ["commentjson", "packaging", "pytest"]
 
 [[package]]
 name = "reuse"
-version = "1.0.0"
+version = "1.1.0"
 description = "reuse is a tool for compliance with the REUSE recommendations."
 category = "dev"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.6.2,<4.0.0"
 
 [package.dependencies]
-binaryornot = "*"
-"boolean.py" = "*"
-Jinja2 = "*"
-license-expression = "*"
-python-debian = "*"
-requests = "*"
+binaryornot = ">=0.4.4,<0.5.0"
+"boolean.py" = ">=3.8"
+Jinja2 = ">=3.0.0,<4.0.0"
+license-expression = ">=1.0"
+python-debian = ">=0.1.38,<0.1.45 || >0.1.45,<0.1.46 || >0.1.46,<0.1.47 || >0.1.47,<0.2.0"
 setuptools = "*"
 
 [[package]]
@@ -774,7 +773,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "1d2e340a66987952a5956f4ebe3f476fd0576716934d1fa8a564847d8a26840b"
+content-hash = "b1c3f9a4c626bd4c1a03ff45785b8b15929b8589ac079d7eb86c5f1d39cb0229"
 
 [metadata.files]
 ansible = [
@@ -1168,8 +1167,8 @@ resolvelib = [
     {file = "resolvelib-0.8.1.tar.gz", hash = "sha256:c6ea56732e9fb6fca1b2acc2ccc68a0b6b8c566d8f3e78e0443310ede61dbd37"},
 ]
 reuse = [
-    {file = "reuse-1.0.0-py3-none-any.whl", hash = "sha256:e2605e796311c424465d741ea2a1e1ad03bbb90b921d74750119c331ca5af46e"},
-    {file = "reuse-1.0.0.tar.gz", hash = "sha256:db3022be2d87f69c8f508b928023de3026f454ce17d01e22f770f7147ac1e8d4"},
+    {file = "reuse-1.1.0-cp311-cp311-manylinux_2_36_x86_64.whl", hash = "sha256:b0f3fb9091ff513af04b555d14a4c529ab05f6a575ab192dd9b68244f1e0721d"},
+    {file = "reuse-1.1.0.tar.gz", hash = "sha256:7a054f6e372ad02d0b1b07368030fc38746b50ed45f5422a81994e7a88b52f1f"},
 ]
 rich = [
     {file = "rich-12.5.1-py3-none-any.whl", hash = "sha256:2eb4e6894cde1e017976d2975ac210ef515d7548bc595ba20e195fb9628acdeb"},
