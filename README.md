@@ -36,26 +36,10 @@ The version to be used to determine the GitLab-Runner
 [package](https://packages.gitlab.com/runner/gitlab-runner) (optional).
 
 ```yaml
-gitlab_runner_apt_repo: "deb https://packages.gitlab.com/runner/gitlab-runner/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} main"
-```
-The repository URL where to install the packages from.
-
-```yaml
 gitlab_runner_deb_file: ""
 ```
 If this is specified the package will be installed from a `.deb`-file.
 If `://` is in the path, Ansible will attempt to download deb before installing.
-
-```yaml
-gitlab_gpg_key_id: "F6403F6544A38863DAA0B6E03F01618A51312F3F"
-```
-Identifier of GPG key that was used to sign the packages.
-
-
-```yaml
-gitlab_gpg_old_key_ids: []
-```
-A list to specify expired GPG keys that should be absent.
 
 ```yaml
 gitlab_runner_concurrent: 1
