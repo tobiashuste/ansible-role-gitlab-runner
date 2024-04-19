@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.1.0](https://github.com/hifis-net/ansible-role-gitlab-runner/tree/v2.1.0) (2024-04-19)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-gitlab-runner/compare/v2.0.2...v2.1.0)
+
+**Implemented enhancements:**
+
+- Support sentry\_dsn parameter [\#248](https://github.com/hifis-net/ansible-role-gitlab-runner/issues/248)
+
+**Merged pull requests:**
+
+- feat: allow to configure the sentry\_dsn parameter [\#249](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/249) ([tobiashuste](https://github.com/tobiashuste))
+- chore\(deps-dev\): bump reuse from 3.0.1 to 3.0.2 [\#247](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/247) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v2.0.2](https://github.com/hifis-net/ansible-role-gitlab-runner/tree/v2.0.2) (2024-03-12)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-gitlab-runner/compare/v2.0.1...v2.0.2)
