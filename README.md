@@ -74,6 +74,13 @@ gitlab_runner_session_server_listen_address: "0.0.0.0:8093"
 An internal URL (`host:port`) for the session server.
 
 ```yaml
+gitlab_runner_sentry_dsn: "https://public@sentry.example.com/1"
+```
+
+Enables tracking of all system level errors to Sentry.
+Empty string by default.
+
+```yaml
 gitlab_runner_session_server_advertise_address: "0.0.0.0:8093"
 ```
 The URL (`host:port`) to access the session server. GitLab Runner exposes it to GitLab.

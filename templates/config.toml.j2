@@ -10,6 +10,9 @@ listen_address = "{{ gitlab_runner_listen_address }}"
 {% endif %}
 check_interval = {{ gitlab_runner_check_interval | default(0) }}
 shutdown_timeout = {{ gitlab_runner_shutdown_timeout | default(0) }}
+{% if gitlab_runner_sentry_dsn | length > 0 %}
+sentry_dsn = "{{ gitlab_runner_sentry_dsn }}"
+{% endif %}
 
 [session_server]
 {% if gitlab_runner_enable_session_server %}

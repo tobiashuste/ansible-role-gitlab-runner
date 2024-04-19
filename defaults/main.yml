@@ -38,6 +38,8 @@ gitlab_runner_config_path: "/etc/gitlab-runner/config.toml"
 
 gitlab_runner_listen_address: ""
 
+gitlab_runner_sentry_dsn: ""
+
 gitlab_runner_list: []
 
 gitlab_runner_insecure_registries: []
