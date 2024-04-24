@@ -37,6 +37,7 @@
       ansible.builtin.command: docker-machine version
       changed_when: false
       register: machine_version
+      when: "gitlab_runner_list | selectattr('executor', 'equalto', 'docker+machine') | list | length > 0"
       failed_when: "'0.16.2-gitlab.25' not in machine_version.stdout"
 
     - name: Assert that Gitlab-Runner is installed

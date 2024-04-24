@@ -7,6 +7,11 @@
 - name: "Set OS family dependent variables"
   ansible.builtin.include_vars: "{{ ansible_os_family | lower }}.yml"
 
+- name: "Set variable if autoscaling runner must be configured"
+  ansible.builtin.set_fact:
+    gitlab_runner_install_docker_machine: "{{ gitlab_runner_list | selectattr('executor', 'equalto', 'docker+machine') | list | length > 0 }}"
+    gitlab_runner_install_autoscaler: "{{ gitlab_runner_list | selectattr('executor', 'equalto', 'docker-autoscaler') | list | length > 0 }}"
+
 - name: "Check if directory /etc/gitlab-runner already exists"
   ansible.builtin.stat:
     path: "/etc/gitlab-runner"
@@ -18,10 +23,15 @@
 
 - name: "Include docker-machine tasks"
   ansible.builtin.include_tasks: install.docker-machine.yml
+  when: "gitlab_runner_install_docker_machine"
 
 - name: "Include installation tasks for Debian-like OS"
   ansible.builtin.include_tasks: install.debianlike.yml
   when: ansible_os_family == "Debian"
+
+- name: "Include autoscaler install tasks"
+  ansible.builtin.include_tasks: install.autoscaler-plugin.yml
+  when: "gitlab_runner_install_autoscaler"
 
 - name: "Include tasks to configure the system"
   ansible.builtin.include_tasks: configuration.yml
@@ -31,12 +41,17 @@
 
 - name: "Initialize docker-machine"
   ansible.builtin.include_tasks: "docker-machine-init.yml"
-  when:
-    - "gitlab_runner.executor == 'docker+machine'"
+  when: "gitlab_runner_install_docker_machine"
   no_log: true
   loop: "{{ gitlab_runner_list }}"
   loop_control:
     loop_var: gitlab_runner
+
+- name: "Slurp ignition json"
+  ansible.builtin.slurp:
+    src: "/etc/gitlab-runner/ignition.json"
+  register: "ignition_json"
+  when: "gitlab_runner_install_autoscaler"
 
 - name: "Template config file"
   ansible.builtin.template:
@@ -47,6 +62,8 @@
     mode: "0600"
   notify: "Restart GitLab-Runner"
   no_log: true
+  vars:
+    ignition_content: "{{ ignition_json['content'] | b64decode }}"
 
 - name: "Start GitLab-Runner"
   ansible.builtin.service:

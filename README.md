@@ -353,6 +353,102 @@ configuration by adding
 
 to the list of configured `volumes`.
 
+### Beta: GitLab-Runner Autoscaling
+
+GitLab-Runner Autoscaling is the future way of implementing autoscaling on
+cloud infrastructures.
+This is the successor to the autoscaling technology based on Docker Machine,
+which is deprecated and will no longer be supported through the course of 2025.
+The new beta feature implements support for the new method in Openstack.
+
+#### Variables
+
+It is important to set these variables. Otherwise the role execution will fail.
+
+```yaml
+gitlab_runner_autoscaler_plugin_url: "https://down.load/fleeting-plugin-openstack-binary"
+```
+
+The URL where to download the autoscaler plugin binary from.
+
+```yaml
+gitlab_runner_autoscaler_plugin_checksum: "sha256:..."
+```
+
+The checksum of the autoscaler plugin binary file.
+
+```yaml
+gitlab_runner_autoscaler_openstack_auth_url: "https://openstack.example:5000/v3"
+```
+
+The Openstack authentication URL of Keystone.
+
+```yaml
+gitlab_runner_autoscaler_openstack_username: "gitlab-runner"
+```
+
+The username of the Openstack user to interact with the API.
+
+```yaml
+gitlab_runner_autoscaler_openstack_password: "123456"
+```
+
+The corresponding password of the user.
+
+```yaml
+gitlab_runner_autoscaler_openstack_project_id: "project_id"
+```
+
+Specify the project id in Openstack.
+
+```yaml
+gitlab_runner_autoscaler_openstack_user_domain_name: "Default"
+```
+
+Domain name of the user authenticating with Openstack.
+
+```yaml
+gitlab_runner_autoscaler_openstack_region_name: "RegionOne"
+```
+
+Region name of the Openstack cluster.
+
+#### Example configuration
+
+```yaml
+gitlab_runner_list:
+  - name: "Test Runner"
+    url: "https://gitlab.com"
+    description: "Autoscale Runner for Openstack"
+    limit: 0
+    authentication_token: "{{ gitlab_runner_authentication_token }}"
+    executor: "docker-autoscaler"
+    environment: "test"
+    docker_image: "ubuntu:latest"
+    docker_disable_cache: True
+    docker_volumes: ["/tmp/certs:/certs", "/opt/docker/daemon.json:/etc/docker/daemon.json:ro"]
+    docker_shm_size: 2147483648
+    docker_privileged: true
+    docker_network_mtu: "{{ gitlab_runner_mtu }}"
+    locked: false
+    tags: "{{ gitlab_runner_tags | default([]) }}"
+    run_untagged: "{{ gitlab_runner_run_untagged | default(false) }}"
+    cache_insecure: "false"
+    autoscaler_max_builds: 1
+    autoscaler_idle_count: 4
+    autoscaler_max_instances: "10"
+    autoscaler_group_name: "autoscaler-runners"
+    autoscaler_cloud_name: "openstack"
+    autoscaler_clouds_config: "/etc/gitlab-runner/clouds.yaml"
+    autoscaler_flavor_ref: "5be35abe-a4d5-427f-a0f8-c7afe19961e2"
+    autoscaler_image_ref: "8225b31c-86fc-4e48-a3e4-8bf800d5fc8d"
+    autoscaler_network_id: "ea80dd07-5dc2-4f18-af04-733ace5892ef"
+    autoscaler_security_group: "c693de06-7dba-4694-9fd6-1b785904eff3"
+    autoscaler_scheduler_hint: "c98090ea-6893-4810-b066-5c3f34038c2a"
+    autoscaler_username: "core"
+    autoscaler_keyname: "runner-internal"
+```
+
 ## Dependencies
 
 GitLab-Runner for Openstack depends on `docker-machine` requiring docker to be available on the system.
