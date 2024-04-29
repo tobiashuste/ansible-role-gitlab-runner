@@ -61,7 +61,7 @@ systemd:
         - name: 10-docker-opts.conf
           contents: |
             [Service]
-            Environment="DOCKER_OPTS=--mtu={{ gitlab_runner_mtu }} {% if gitlab_runner_set_default_network_opts %}--default-network-opt bridge=com.docker.network.bridge.mtu={{ gitlab_runner_mtu }}{% endif %}{% if registry_mirrors_list | length > 0 %}{% for registry_mirror in registry_mirrors_list %} --registry-mirror={{ registry_mirror }}{% endfor %}{% endif %}"
+            Environment="DOCKER_OPTS=--mtu={{ gitlab_runner_mtu }} {% if gitlab_runner_set_default_network_opts %}--default-network-opt bridge=com.docker.network.bridge.mtu={{ gitlab_runner_mtu }}{% endif %}{% if registry_mirrors_list | length > 0 %}{% for registry_mirror in registry_mirrors_list %} --registry-mirror={{ registry_mirror }}{% endfor %}{% endif %}{% if gitlab_runner_insecure_registries | length > 0 %}{% for insecure_registry in gitlab_runner_insecure_registries %} --insecure-registry={{ insecure_registry }}{% endfor %}{% endif %}"
     - name: binfmt-init.service
       enabled: true
       contents: |

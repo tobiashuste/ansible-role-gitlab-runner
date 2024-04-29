@@ -87,4 +87,40 @@ sentry_dsn = "{{ gitlab_runner_sentry_dsn }}"
     MachineName = "{{ runner.machine_name }}"
     MachineOptions = {{ runner.machine_options | default([]) | to_json }}
 {% endif %}
+{% if runner.executor == "docker-autoscaler" %}
+  [runners.autoscaler]
+    capacity_per_instance = 1
+    max_use_count = {{ runner.autoscaler_max_builds | default(0) }}
+    max_instances = {{ runner.autoscaler_max_instances }}
+    plugin = "fleeting-plugin-openstack"
+
+  [runners.autoscaler.plugin_config]
+    cloud = "{{ runner.autoscaler_cloud_name }}"
+    clouds_config = "{{ runner.autoscaler_clouds_config }}"
+    name = "{{ runner.autoscaler_group_name | default('autoscaler-runners') }}"
+    boot_time = "3m"
+
+  [runners.autoscaler.plugin_config.server_spec]
+    name = "autoscaler-%d"
+    description = "{{ runner.description }}"
+    tags = [ "gitlab-ci" ]
+    imageRef = "{{ runner.autoscaler_image_ref }}"
+    flavorRef = "{{ runner.autoscaler_flavor_ref }}"
+    key_name = "{{ runner.autoscaler_keyname }}"
+    networks = [ { uuid = "{{ runner.autoscaler_network_id }}" } ]
+    security_groups = [ "{{ runner.autoscaler_security_group }}" ]
+    scheduler_hints = { group = "{{ runner.autoscaler_scheduler_hint }}" }
+    user_data = '{{ ignition_content | to_json }}'
+
+  [runners.autoscaler.connector_config]
+    username = "{{ runner.autoscaler_username }}"
+    key_path = "{{ gitlab_runner_ssh_private_key_path }}"
+    use_static_credentials = true
+    keepalive = "30s"
+    timeout = "0m"
+    use_external_addr = false
+
+  [[runners.autoscaler.policy]]
+    idle_count = {{ runner.autoscaler_idle_count | default(0) }}
+{% endif %}
 {% endfor %}
