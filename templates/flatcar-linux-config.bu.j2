@@ -38,14 +38,14 @@ storage:
 {% if gitlab_runner_insecure_registries | length > 0 %}
             "insecure-registries": {{ gitlab_runner_insecure_registries | to_json }},
 {% endif %}
-            "mtu": {{ gitlab_runner_mtu }},
 {% if gitlab_runner_set_default_network_opts %}
             "default-network-opts": {
               "bridge": {
                 "com.docker.network.bridge.mtu": "{{ gitlab_runner_mtu }}"
               }
-            }
+            },
 {% endif %}
+            "mtu": {{ gitlab_runner_mtu }}
           }
     - path: /etc/flatcar/update.conf
       overwrite: true
