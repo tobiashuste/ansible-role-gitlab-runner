@@ -13,26 +13,26 @@ type: 'software'
 authors:
   - given-names: 'Norman'
     family-names: 'Ziegner'
-    email: 'norman.ziegner@ufz.de'
+    email: 'n.ziegner@hzdr.de'
     affiliation: >-
-      Helmholtz Centre for Environmental Research
-      GmbH - UFZ
+      Helmholtz-Zentrum Dresden - Rossendorf e. V.
+      (HZDR)
     orcid: 'https://orcid.org/0000-0001-7579-216X'
   - given-names: 'Tobias'
     family-names: 'Huste'
     email: 't.huste@hzdr.de'
     affiliation: >-
-      Helmholtz-Zentrum Dresden-Rossendorf e. V.
+      Helmholtz-Zentrum Dresden - Rossendorf e. V.
       (HZDR)
     orcid: 'https://orcid.org/0000-0002-5590-7473'
   - given-names: 'Christian'
     family-names: 'Hüser'
     email: 'c.hueser@hzdr.de'
     affiliation: >-
-      Helmholtz-Zentrum Dresden-Rossendorf e. V.
+      Helmholtz-Zentrum Dresden - Rossendorf e. V.
       (HZDR)
     orcid: 'https://orcid.org/0000-0002-5028-6663'
 repository-code: 'https://github.com/hifis-net/ansible-role-gitlab-runner'
 repository-artifact: 'https://galaxy.ansible.com/hifis/gitlab_runner'
-version: 'v2.1.0'
-date-released: '2024-04-19'
+version: 'v3.0.0'
+date-released: '2024-05-07'
