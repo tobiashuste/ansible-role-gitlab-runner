@@ -1,5 +1,30 @@
 # Changelog
 
+## [v3.0.0](https://github.com/hifis-net/ansible-role-gitlab-runner/tree/v3.0.0) (2024-05-07)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-gitlab-runner/compare/v2.1.0...v3.0.0)
+
+**Implemented enhancements:**
+
+- Add support for Ubuntu 24.04 [\#254](https://github.com/hifis-net/ansible-role-gitlab-runner/issues/254)
+- Allow to configure GitLab Runner Autoscaling without docker-machine [\#251](https://github.com/hifis-net/ansible-role-gitlab-runner/issues/251)
+
+**Fixed bugs:**
+
+- Fix docker config file if variable is set to false [\#253](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/253) ([tobiashuste](https://github.com/tobiashuste))
+
+**Closed issues:**
+
+- Require at least ansible-core 2.15 [\#257](https://github.com/hifis-net/ansible-role-gitlab-runner/issues/257)
+
+**Merged pull requests:**
+
+- Require at least ansible-core 2.15 [\#258](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/258) ([tobiashuste](https://github.com/tobiashuste))
+- Update all dependencies [\#256](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/256) ([tobiashuste](https://github.com/tobiashuste))
+- Add support for Ubuntu 24.04 [\#255](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/255) ([tobiashuste](https://github.com/tobiashuste))
+- Beta: implement autoscaling using new autoscaler method [\#252](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/252) ([tobiashuste](https://github.com/tobiashuste))
+- Try new package registration method [\#239](https://github.com/hifis-net/ansible-role-gitlab-runner/pull/239) ([tobiashuste](https://github.com/tobiashuste))
+
 ## [v2.1.0](https://github.com/hifis-net/ansible-role-gitlab-runner/tree/v2.1.0) (2024-04-19)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-gitlab-runner/compare/v2.0.2...v2.1.0)
